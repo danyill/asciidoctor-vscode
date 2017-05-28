@@ -1,0 +1,1 @@
+With the increased usage, new bugs have been reported which seem to be related to the vscode core or platform specific. In order to improve the extension maintanibility the extension will be rewritten based on the VSCode core markdown plugin. This will allow for assessement and reporting of  issues at the extension or vscode core level.

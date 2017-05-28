@@ -1,7 +1,7 @@
 {
     "name": "asciidoctor-vscode",
     "displayName": "AsciiDoc",
-    "description": "Live preview (with AsciiDoctor) and syntax highlighting.",
+    "description": "Live preview (using AsciiDoctor) and syntax highlighting.",
     "version": "0.3.3",
     "publisher": "joaompinto",
     "author": "João Pinto <lamego.pinto@gmail.com>",
@@ -18,16 +18,16 @@
     "bugs": "https://github.com/joaompinto/asciidoctor-vscode/issues",
     "homepage": "https://github.com/joaompinto/asciidoctor-vscode/blob/master/README.md",
     "icon": "images/icon.png",
-    "main": "./out/src/extension",
+    "main": "./out/extension",
     "engines": {
-        "vscode": "^1.5.0"
+		"vscode": "^1.12.2"
     },
     "categories": [
         "Languages"
     ],
     "activationEvents": [
-        "onCommand:adoc.preview",
-        "onCommand:adoc.previewToSide"
+        "onCommand:asciidoc.showPreview",
+        "onCommand:asciidoc.showPreviewToSide"
     ],
     "contributes": {
         "languages": [
@@ -63,30 +63,42 @@
         },
         "keybindings": [
             {
-                "command": "adoc.preview",
+                "command": "asciidoc.showPreview",
                 "key": "ctrl+shift+r",
                 "when": "editorTextFocus"
             },
             {
-                "command": "adoc.previewToSide",
+                "command": "asciidoc.showPreviewToSide",
                 "key": "ctrl+k r",
                 "when": "editorTextFocus"
             }
         ],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "editorLangId == asciidoc",
+					"command": "asciidoc.showPreviewToSide",
+					"alt": "asciidoc.showPreview",
+					"group": "navigation"
+				}
+			],
+			"explorer/context": [
+				{
+					"when": "resourceLangId == markdown",
+					"command": "asciidoc.showPreview",
+					"group": "navigation"
+				}
+			]
+		},
         "commands": [
             {
-                "command": "adoc.preview",
+                "command": "asciidoc.showPreview",
                 "title": "Toggle Preview",
                 "category": "AsciiDoc"
             },
             {
-                "command": "adoc.previewToSide",
+                "command": "asciidoc.showPreviewToSide",
                 "title": "Open Preview to the Side",
-                "category": "AsciiDoc"
-            },
-            {
-                "command": "adoc.updateTimer",
-                "title": "Start adoc updateTimer",
                 "category": "AsciiDoc"
             }
         ]
@@ -96,15 +108,13 @@
         "compile": "./node_modules/.bin/tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "file-url": "^1.0.1",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
-    },
     "dependencies": {
-        "vscode": "^1.0.0",
         "file-url": "^1.0.1",
-        "tmp": "^0.0.29"
-    }
+        "tmp": "^0.0.29",
+        "vscode-nls": "^2.0.2"
+    },
+	"devDependencies": {
+        "typescript": "^2.0.3",
+		"@types/node": "^7.0.4"
+	}
 }
