@@ -447,6 +447,7 @@
 		"https-proxy-agent": "^4.0.0",
 		"moment": "^2.14.1",
 		"npm-which": "^3.0.1",
+		"tiny-worker": "^2.3.0",
 		"tmp": "0.1.0",
 		"upath": "^1.2.0",
 		"viz.js": "^2.1.2",

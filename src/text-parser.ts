@@ -6,6 +6,8 @@ import * as npm_which from "npm-which";
 
 const fileUrl = require('file-url');
 const Viz = require("viz.js");
+let { Module, render } = require('viz.js/full.render.js');
+
 var which = npm_which(__dirname) // __dirname often good enough
 
 const asciidoctor = require('@asciidoctor/core')()
@@ -23,8 +25,9 @@ asciidoctor.Extensions.register(function () {
         self.named('graphviz');
         self.onContext('literal');
         self.process(function (parent, reader, attrs) {
-            var svg = Viz(reader.getString());
-            return self.createBlock(parent, 'pass', svg);
+            viz.renderSVGElement(reader.getString()).then(svg => {
+                return self.createBlock(parent, 'pass', 'hhhhh')
+            })
         });
     });
 });
